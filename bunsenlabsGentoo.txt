@@ -18,3 +18,7 @@ auto-sync = yes
 
 sudo cp ~/.config/openbox/bunsen/common/bl-include.cfg /usr/local/lib/bunsen/common/
 
+git clone https://github.com/lxde/compton-conf;
+cd compton-conf;
+cmake CMakeLists.txt;
+make -j2;
