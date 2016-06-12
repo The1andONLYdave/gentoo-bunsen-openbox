@@ -1,0 +1,23 @@
+#!/bin/bash
+# bl-lock
+# -------
+# This is a wrapper for the 'light-locker-command -l' command.
+# If running in live mode, offer up a prompt detailing the live session password.
+# Else, run light-locker-command -l.
+
+LOCK_COMMAND=(light-locker-command -l)
+
+which ${LOCK_COMMAND[0]} >/dev/null 2>&1 || {
+    echo "$0: ${LOCK_COMMAND[0]} no such command." >&2
+    exit 1
+}
+
+if [ -d /lib/live ] && [ ! -f /home/$USER/.config/bunsen/bl-lock ]; then
+    yad --image='bunsenlabs' --window-icon='distributor-logo-bunsenlabs' --center --borders=20 --button=gtk-ok --fixed --on-top --title='Lock screen info:' --text='Lock screen has detected you are running a live session.\nThe username needed to unlock the screen is "user" and the password is "live".\nThis notice will only be displayed once per live session.'
+    mkdir -p /home/$USER/.config/bunsen
+    touch /home/$USER/.config/bunsen/bl-lock
+fi
+
+"${LOCK_COMMAND[@]}"
+
+exit 0
