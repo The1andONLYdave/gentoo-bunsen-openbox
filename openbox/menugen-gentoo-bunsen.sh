@@ -7,10 +7,10 @@
 mmaker -t konsole openbox -f
 
 # add custom location for sublime 2
-echo "/usr/local/sublimetext2/sublime_text" >> ~/.config/openbox/menu.xml
+#echo "/usr/local/sublimetext2/sublime_text" >> ~/.config/openbox/menu.xml
 
 # add some pipe menus - little bit modificated for gentoo - credits go to the creators at bunsenlablinux - an amazing distribution if you prefer debian 8 more than gentoo.
-~/.config/openbox/pipemenus.rc
+#~/.config/openbox/pipemenus.rc
 
 #reload menu in running openbox session, so we can run this script from openbox-autostart.sh
 openbox --reconfigure
