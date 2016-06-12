@@ -1,0 +1,16 @@
+emerge -av arandr bash-completion conky x11-themes/vanilla-dmz-xcursors sys-power/ncpufreqd media-fonts/droid media-fonts/cantarell media-fonts/inconsolata hddtemp hdparm htop atop lm_sensors lxde-base/lxappearance lxde-base/lxappearance-obconf x11-misc/obconf terminator smartmontools sudo scrot thunar xfce-extra/thunar-archive-plugin xfce-extra/thunar-media-tags-plugin xfce-extra/thunar-vcs-plugin x11-misc/tint2 xfce-extra/tumbler media-fonts/ttf-bitstream-vera openbox openbox-menu x11-misc/obmenu x11-misc/obmenu-generator x11-misc/nitrogen xfce-extra/xfce4-volumed media-sound/volti xfce-extra/xfce4-power-manager sys-power/powertop x11-misc/light-locker pantheon-base/plank x11-misc/gmrun x11-misc/dmenu xfce-extra/xfce4-screenshooter media-sound/pavucontrol 
+
+app-shells/pdmenu?
+
+x11-misc/xdotool x11-misc/wmctrl #aerosnap
+x11-misc/compton #compositionmanager
+
+sublime 2 tarball download and untar to /usr/local/sublimetext2/ , then makelink
+sudo ln -s  /usr/local/sublimetext2/sublime_text /usr/local/bin/subl
+
+cat /etc/portage/repos.conf/elementary.conf 
+[elementary]
+location = /usr/local/overlay/elementary
+sync-type = git
+sync-uri = https://github.com/pimvullers/elementary.git
+auto-sync = yes
