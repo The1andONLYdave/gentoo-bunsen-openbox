@@ -108,3 +108,7 @@ sudo mount /dev/sda2 /mnt/win/ &
 ## Plank Dockingbar
 (sleep 2; plank) &
 
+eval `ssh-agent` &
+(sleep 2; ssh-add ./id_rsa_github) &
+
+
