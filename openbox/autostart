@@ -104,3 +104,7 @@ terminator &
 #mmaker -t konsole openbox -f &
 
 sudo mount /dev/sda2 /mnt/win/ &
+
+## Plank Dockingbar
+(sleep 2; plank) &
+
