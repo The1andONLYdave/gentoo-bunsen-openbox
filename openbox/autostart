@@ -59,7 +59,7 @@ sleep 1 && /usr/libexec/polkit-gnome-authentication-agent-1 &
 
 nitrogen --restore &
 
-#bl-compositor --start &
+~/.config/openbox/bl-commands/bl-compositor --start &
 
 ## Start the tint2 session (the default tint2 will run if no sessions have been set)
 #(sleep 2s; bl-tint2-session) &

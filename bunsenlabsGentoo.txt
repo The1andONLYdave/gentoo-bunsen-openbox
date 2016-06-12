@@ -4,6 +4,7 @@ app-shells/pdmenu?
 
 x11-misc/xdotool x11-misc/wmctrl #aerosnap
 x11-misc/compton #compositionmanager
+x11-apps/mesa-progs #glxinfo
 
 sublime 2 tarball download and untar to /usr/local/sublimetext2/ , then makelink
 sudo ln -s  /usr/local/sublimetext2/sublime_text /usr/local/bin/subl
@@ -14,3 +15,6 @@ location = /usr/local/overlay/elementary
 sync-type = git
 sync-uri = https://github.com/pimvullers/elementary.git
 auto-sync = yes
+
+sudo cp ~/.config/openbox/bunsen/common/bl-include.cfg /usr/local/lib/bunsen/common/
+
