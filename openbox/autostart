@@ -101,7 +101,7 @@ xfce4-power-manager &
 
 terminator &
 
-#mmaker -t konsole openbox -f &
+(mmaker -t xterm openbox -f; sed -i -e 's/xterm -e/terminator -e/g' /home/david-lee/.config/openbox/menu.xml ; sleep 2; openbox --reconfigure) &
 
 sudo mount /dev/sda2 /mnt/win/ &
 
@@ -111,4 +111,4 @@ sudo mount /dev/sda2 /mnt/win/ &
 eval `ssh-agent` &
 (sleep 2; ssh-add ./id_rsa_github) &
 
-
+subl /home/david-lee/todo.txt &
