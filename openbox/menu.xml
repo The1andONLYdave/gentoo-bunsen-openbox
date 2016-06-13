@@ -62,9 +62,6 @@
 			<item label="Mozilla Firefox (bin)"> <action name="Execute">
 				<execute>firefox-bin</execute>
 			</action> </item>
-			<item label="SSH AskPass"> <action name="Execute">
-				<execute>ssh-add</execute>
-			</action> </item>
 			<item label="TkVNC"> <action name="Execute">
 				<execute>terminator -e tkvnc</execute>
 			</action> </item>
@@ -109,6 +106,9 @@
 			</action> </item>
 			<item label="MC"> <action name="Execute">
 				<execute>terminator -e mc</execute>
+			</action> </item>
+			<item label="Oracle xVM VirtualBox"> <action name="Execute">
+				<execute>VirtualBox</execute>
 			</action> </item>
 			<item label="Terminator"> <action name="Execute">
 				<execute>terminator</execute>

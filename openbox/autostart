@@ -101,7 +101,7 @@ xfce4-power-manager &
 
 terminator &
 
-(mmaker -t xterm openbox -f; sed -i -e 's/xterm -e/terminator -e/g' /home/david-lee/.config/openbox/menu.xml ; sleep 2; openbox --reconfigure) &
+(mmaker -t xterm openbox -f; sed -i -e 's/xterm -e/terminator -e/g' /home/david-lee/.config/openbox/menu.xml ; sed -i -e 's/VirtualBox/sudo VirtualBox -e/g' /home/david-lee/.config/openbox/menu.xml ; sleep 2; openbox --reconfigure) &
 
 sudo mount /dev/sda2 /mnt/win/ &
 
