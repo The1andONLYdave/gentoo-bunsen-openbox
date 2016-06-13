@@ -90,7 +90,7 @@ xfce4-power-manager &
 #(sleep 2; fdpowermon) &
 
 ## Start xscreensaver (light-locker now used by default, run via XDG autostart.)
-#xscreensaver -no-splash &
+xscreensaver -no-splash &
 
 ## bl-welcome - post-installation script, will not run in a live session and
 ## only runs once. Safe to remove.
@@ -108,7 +108,6 @@ sudo mount /dev/sda2 /mnt/win/ &
 ## Plank Dockingbar
 (sleep 2; plank) &
 
-eval `ssh-agent` &
-(sleep 2; ssh-add ./id_rsa_github) &
+(ssh-agent; sleep 2; ssh-add ./id_rsa_github) &
 
 subl /home/david-lee/todo.txt &

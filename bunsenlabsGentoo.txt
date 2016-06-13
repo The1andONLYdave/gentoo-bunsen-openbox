@@ -53,5 +53,7 @@ class SysMenu(MenuMaker.Menu) :
 		]
 		super(SysMenu, self).__init__(subs)
 		self.align = MenuMaker.Entry.StickBottom
+#can call bl-exit here
 
+sudo ln -s ~/.config/openbox/bl-commands/* /usr/local/bin
 
