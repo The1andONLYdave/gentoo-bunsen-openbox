@@ -1,39 +1,37 @@
 emerge -av arandr bash-completion conky x11-themes/vanilla-dmz-xcursors sys-power/ncpufreqd media-fonts/droid media-fonts/cantarell media-fonts/inconsolata hddtemp hdparm htop atop lm_sensors lxde-base/lxappearance lxde-base/lxappearance-obconf x11-misc/obconf terminator smartmontools sudo scrot thunar xfce-extra/thunar-archive-plugin xfce-extra/thunar-media-tags-plugin xfce-extra/thunar-vcs-plugin x11-misc/tint2 xfce-extra/tumbler media-fonts/ttf-bitstream-vera openbox openbox-menu x11-misc/obmenu x11-misc/obmenu-generator x11-misc/nitrogen xfce-extra/xfce4-volumed media-sound/volti xfce-extra/xfce4-power-manager sys-power/powertop x11-misc/light-locker pantheon-base/plank x11-misc/gmrun x11-misc/dmenu xfce-extra/xfce4-screenshooter media-sound/pavucontrol 
-
-app-shells/pdmenu?
-
 x11-misc/xdotool x11-misc/wmctrl #aerosnap
 x11-misc/compton #compositionmanager
 x11-apps/mesa-progs #glxinfo
+app-misc/screenfetch
+xfce-extra/xfce4-clipman-plugin
+
+app-shells/pdmenu?
 
 sublime 2 tarball download and untar to /usr/local/sublimetext2/ , then makelink
 sudo ln -s  /usr/local/sublimetext2/sublime_text /usr/local/bin/subl
 
+repos:
+
 cat /etc/portage/repos.conf/elementary.conf 
-[elementary]
-location = /usr/local/overlay/elementary
-sync-type = git
-sync-uri = https://github.com/pimvullers/elementary.git
-auto-sync = yes
-
-sudo cp ~/.config/openbox/bunsen/common/bl-include.cfg /usr/local/lib/bunsen/common/
-
-git clone https://github.com/lxde/compton-conf;
-cd compton-conf;
-cmake CMakeLists.txt;
-make -j2;
-app-misc/screenfetch
+	[elementary]
+	location = /usr/local/overlay/elementary
+	sync-type = git
+	sync-uri = https://github.com/pimvullers/elementary.git
+	auto-sync = yes
 
 emerge layman and add neofetch:
 Add the 3rd party repo
-layman -o https://gist.githubusercontent.com/z1lt0id/24d45b15800b98975260/raw/2fdf6645cdc3c1ca0b0af83a7bf8f86598e386ae/fs0ciety.xml -f -a fs0ciety
+	layman -o https://gist.githubusercontent.com/z1lt0id/24d45b15800b98975260/raw/2fdf6645cdc3c1ca0b0af83a7bf8f86598e386ae/fs0ciety.xml -f -a fs0ciety
 Sync the repos
-layman -S
+	layman -S
 To enable w3m and scrot support, enable the appropriate flags.
-echo "x11-apps/neofetch" >> /etc/portage/package.use
+	echo "x11-apps/neofetch" >> /etc/portage/package.use
 Install the package
-emerge -a x11-apps/neofetch
-There is also a git version available: emerge --autounmask-write =x11-apps/neofetch-9999
+	emerge -a x11-apps/neofetch
+	There is also a git version available: emerge --autounmask-write =x11-apps/neofetch-9999
+
+
+sudo cp ~/.config/openbox/bunsen/common/bl-include.cfg /usr/local/lib/bunsen/common/
 
 
 add in  /usr/lib64/menumaker/MenuMaker/OpenBox3.py in Sysmenu:
@@ -47,13 +45,13 @@ class SysMenu(MenuMaker.Menu) :
 			X('<menu id="client-list-menu"/>'),
 			X('<item label="Reconfigure"> <action name="Reconfigure"/> </item>'),
 			MenuMaker.Sep(),
-			X('<item label="Exit"> <action name="Exit"/> </item>'),
+			X('<item label="Exit"> <action name="Execute"> <execute> sudo bl-exit </execute> </item>'),
 			X('<item label="Reboot"> <action name="Execute"> <prompt> Reboot?  </prompt> <execute> sudo shutdown -r now </execute> </action> </item>'),
 			X('<item label="Shutdown"> <action name="Execute"> <prompt> Shutdown?  </prompt> <execute> sudo shutdown -h now </execute> </action> </item>')    
 		]
 		super(SysMenu, self).__init__(subs)
 		self.align = MenuMaker.Entry.StickBottom
-#can call bl-exit here
+
 
 sudo ln -s ~/.config/openbox/bl-commands/* /usr/local/bin
 

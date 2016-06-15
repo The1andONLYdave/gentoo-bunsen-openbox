@@ -107,8 +107,8 @@
 			<item label="MC"> <action name="Execute">
 				<execute>terminator -e mc</execute>
 			</action> </item>
-			<item label="Oracle xVM VirtualBox"> <action name="Execute">
-				<execute>VirtualBox</execute>
+			<item label="Oracle xVM sudo VirtualBox -e"> <action name="Execute">
+				<execute>sudo VirtualBox -e</execute>
 			</action> </item>
 			<item label="Terminator"> <action name="Execute">
 				<execute>terminator</execute>
@@ -125,6 +125,11 @@
 		</menu>
 		<menu id="37" label="System">
 			<menu id="36" label="Settings">
+				<menu id="35" label="Xfce">
+					<item label="Screensaver"> <action name="Execute">
+						<execute>xscreensaver-demo</execute>
+					</action> </item>
+				</menu>
 				<item label="ARandR"> <action name="Execute">
 					<execute>arandr</execute>
 				</action> </item>
@@ -142,6 +147,9 @@
 				</action> </item>
 				<item label="Panel"> <action name="Execute">
 					<execute>xfce4-panel --preferences</execute>
+				</action> </item>
+				<item label="Power Manager"> <action name="Execute">
+					<execute>xfce4-power-manager-settings</execute>
 				</action> </item>
 				<item label="Preferred Applications"> <action name="Execute">
 					<execute>exo-preferred-applications</execute>
@@ -179,11 +187,38 @@
 			<item label="About Xfce"> <action name="Execute">
 				<execute>xfce4-about</execute>
 			</action> </item>
+			<item label="Activate ScreenSaver (Next)"> <action name="Execute">
+				<execute>xscreensaver-command -next</execute>
+			</action> </item>
+			<item label="Activate ScreenSaver (Previous)"> <action name="Execute">
+				<execute>xscreensaver-command -prev</execute>
+			</action> </item>
+			<item label="Activate ScreenSaver (Random)"> <action name="Execute">
+				<execute>xscreensaver-command -activate</execute>
+			</action> </item>
+			<item label="Clipman"> <action name="Execute">
+				<execute>xfce4-clipman</execute>
+			</action> </item>
+			<item label="Demo Screen Hacks"> <action name="Execute">
+				<execute>xscreensaver-command -demo</execute>
+			</action> </item>
+			<item label="Disable XScreenSaver"> <action name="Execute">
+				<execute>xscreensaver-command -exit</execute>
+			</action> </item>
+			<item label="Enable XScreenSaver"> <action name="Execute">
+				<execute>xscreensaver</execute>
+			</action> </item>
 			<item label="File Manager"> <action name="Execute">
 				<execute>exo-open --launch FileManager</execute>
 			</action> </item>
 			<item label="Info"> <action name="Execute">
 				<execute>terminator -e info</execute>
+			</action> </item>
+			<item label="Reinitialize XScreenSaver"> <action name="Execute">
+				<execute>xscreensaver-command -restart</execute>
+			</action> </item>
+			<item label="ScreenSaver Preferences"> <action name="Execute">
+				<execute>xscreensaver-command -prefs</execute>
 			</action> </item>
 			<item label="Screenshot"> <action name="Execute">
 				<execute>xfce4-screenshooter</execute>
@@ -203,7 +238,7 @@
 			<menu id="client-list-menu"/>
 			<item label="Reconfigure"> <action name="Reconfigure"/> </item>
 			<separator/>
-			<item label="Exit"> <action name="Exit"/> </item>
+			<item label="Exit"> <action name="Execute"> <execute> sudo bl-exit </execute> </item>
 			<item label="Reboot"> <action name="Execute"> <prompt> Reboot?  </prompt> <execute> sudo shutdown -r now </execute> </action> </item>
 			<item label="Shutdown"> <action name="Execute"> <prompt> Shutdown?  </prompt> <execute> sudo shutdown -h now </execute> </action> </item>
 		</menu>

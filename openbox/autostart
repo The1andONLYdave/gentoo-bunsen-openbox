@@ -55,15 +55,18 @@ xset b off
 ## SETTINGS END
 
 ## GNOME PolicyKit authentication
-sleep 1 && /usr/libexec/polkit-gnome-authentication-agent-1 &
-
-nitrogen --restore &
+(sleep 1; /usr/libexec/polkit-gnome-authentication-agent-1) &
 
 ~/.config/openbox/bl-commands/bl-compositor --start &
 
+nitrogen --restore &
+
+#Parsing Menufile after creation
+(mmaker -t xterm openbox -f; sed -i -e 's/xterm -e/terminator -e/g' /home/david-lee/.config/openbox/menu.xml ; sed -i -e 's/VirtualBox/sudo VirtualBox -e/g' /home/david-lee/.config/openbox/menu.xml ; sleep 2; openbox --reconfigure) &
+
 ## Start the tint2 session (the default tint2 will run if no sessions have been set)
-#(sleep 2s; bl-tint2-session) &
-(sleep 2s; tint2) &
+(sleep 2s; bl-tint2-session) &
+#(sleep 2s; tint2) &
 
 ## Start the Conky session (the default conkyrc will run if no sessions have been set)
 (sleep 2s; conky) &
@@ -71,43 +74,31 @@ nitrogen --restore &
 ## Volume control for systray
 (sleep 2; volti) &
 
+## Start Clipboard manager
+(sleep 3; xfce4-clipman ) &
+
 ## Volume keys daemon
 xfce4-volumed &
 
-## Start Clipboard manager
-#(sleep 3; clipit) &
-
-## Start Thunar Daemon, if set as bl-file-manager
-#if [ "$(readlink -f $(which bl-file-manager))" = "$(which thunar)" ]
-#then
-    thunar --daemon &
-#fi
-
-## Enable power management
-xfce4-power-manager &
-
-## Start the battery applet
-#(sleep 2; fdpowermon) &
-
-## Start xscreensaver (light-locker now used by default, run via XDG autostart.)
-xscreensaver -no-splash &
-
-## bl-welcome - post-installation script, will not run in a live session and
-## only runs once. Safe to remove.
-#(sleep 10; bl-welcome --firstrun) &
-
-## bl-fortune - have the system come up with a little adage (not yet enabled)
-#(sleep 120; bl-fortune) &
-
-terminator &
-
-(mmaker -t xterm openbox -f; sed -i -e 's/xterm -e/terminator -e/g' /home/david-lee/.config/openbox/menu.xml ; sed -i -e 's/VirtualBox/sudo VirtualBox -e/g' /home/david-lee/.config/openbox/menu.xml ; sleep 2; openbox --reconfigure) &
-
-sudo mount /dev/sda2 /mnt/win/ &
+## Start Thunar Daemon
+thunar --daemon &
 
 ## Plank Dockingbar
 (sleep 2; plank) &
 
-(ssh-agent; sleep 2; ssh-add ./id_rsa_github) &
+## Enable power management
+xfce4-power-manager &
 
-subl /home/david-lee/todo.txt &
+## Start xscreensaver (light-locker now used by default, run via XDG autostart.)
+xscreensaver -no-splash &
+
+# start last, we know we're finished autoloading
+(sleep 10; terminator; subl /home/david-lee/todo.txt )&
+
+
+#disabled:
+## Start the battery applet
+#(sleep 2; fdpowermon) &
+
+#don't work yet
+#(ssh-agent; sleep 2; ssh-add ./id_rsa_github) &
