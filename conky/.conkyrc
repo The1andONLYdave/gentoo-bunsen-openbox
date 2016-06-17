@@ -32,8 +32,8 @@ own_window_title Bunsen Labs Default Conky
 ### Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
 # own_window_argb_value 50
 
-minimum_size 300 200  ### width | height
-maximum_width 300
+minimum_size 330 200  ### width | height
+maximum_width 330
 
 gap_x 20    ### left | right
 gap_y 45    ### up | down
@@ -135,7 +135,7 @@ update_interval 1
 TEXT
 ${color}${alignc}S Y S T E M    I N F O${alignr} $battery  $battery_time 
 ${hr}
-$if_mixer_mute    ${mixer 'Master',0}                  ${blink Lautstaerke auf 0 } $endif 
+#$if_mixer_mute    ${mixer 'Master',0}                  ${blink Lautstaerke auf 0 } $endif 
 Kernel:${alignr}$kernel
 Host:${alignr}${nodename}
 Uptime:${alignr}${uptime}
@@ -169,7 +169,7 @@ Swap usage:$alignr$swap/$swapmax
 ${swapbar}
 Disk usage:${fs_used /}/${fs_size /} $alignr Disk Temp: ${hddtemp /dev/sda}C
 ${fs_bar /}
-CPU usage:${cpu cpu0}%${goto 60}${freq_g}$alignr CPU Temp: ${acpitemp}C
+CPU usage:${cpu cpu0}%${goto 120}${freq_g}-Ghz$alignr CPU Temp: ${acpitemp}C
 ${cpubar}
 Load:$alignr$loadavg
 Disk:$alignr${diskio /dev/sda}
