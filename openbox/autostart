@@ -92,6 +92,8 @@ xfce4-power-manager &
 ## Start xscreensaver (light-locker now used by default, run via XDG autostart.)
 xscreensaver -no-splash &
 
+sudo mount /dev/sda2 /mnt/win &
+
 # start last, we know we're finished autoloading
 (sleep 10; terminator; subl /home/david-lee/todo.txt )&
 
@@ -102,3 +104,4 @@ xscreensaver -no-splash &
 
 #don't work yet
 #(ssh-agent; sleep 2; ssh-add ./id_rsa_github) &
+

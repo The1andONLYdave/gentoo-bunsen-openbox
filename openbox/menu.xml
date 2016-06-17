@@ -32,6 +32,11 @@
 				</action> </item>
 			</menu>
 		</menu>
+		<menu id="6" label="Graphics">
+			<item label="xv"> <action name="Execute">
+				<execute>xv</execute>
+			</action> </item>
+		</menu>
 		<menu id="7" label="Multimedia">
 			<item label="ALSA mixer"> <action name="Execute">
 				<execute>terminator -e alsamixer</execute>
@@ -72,7 +77,15 @@
 				<execute>exo-open --launch WebBrowser</execute>
 			</action> </item>
 		</menu>
+		<menu id="3" label="Office">
+			<item label="QtADB"> <action name="Execute">
+				<execute>QtADB</execute>
+			</action> </item>
+		</menu>
 		<menu id="39" label="Other">
+			<item label="Android SDK update-manager"> <action name="Execute">
+				<execute>android</execute>
+			</action> </item>
 			<item label="compton"> <action name="Execute">
 				<execute>compton</execute>
 			</action> </item>
@@ -101,6 +114,9 @@
 			</action> </item>
 		</menu>
 		<menu id="19" label="Shells">
+			<item label="Genymotion"> <action name="Execute">
+				<execute>genymotion</execute>
+			</action> </item>
 			<item label="GIT"> <action name="Execute">
 				<execute>terminator -e git</execute>
 			</action> </item>

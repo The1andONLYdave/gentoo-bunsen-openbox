@@ -32,8 +32,8 @@ own_window_title Bunsen Labs Default Conky
 ### Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
 # own_window_argb_value 50
 
-minimum_size 200 0  ### width | height
-maximum_width 200
+minimum_size 300 200  ### width | height
+maximum_width 300
 
 gap_x 20    ### left | right
 gap_y 45    ### up | down
@@ -133,24 +133,18 @@ double_buffer yes
 update_interval 1
 
 TEXT
-${color}${alignc}S Y S T E M    I N F O
+${color}${alignc}S Y S T E M    I N F O${alignr} $battery  $battery_time 
 ${hr}
+$if_mixer_mute    ${mixer 'Master',0}                  ${blink Lautstaerke auf 0 } $endif 
+Kernel:${alignr}$kernel
 Host:${alignr}${nodename}
 Uptime:${alignr}${uptime}
 UTC:${alignr}${utime %H:%M}
 
 ${goto 60}Used${alignr}Size
 Root${goto 60}${fs_used /}${alignr}${fs_size /}
-Home${goto 60}${fs_used /home}${alignr}${fs_size /home}
-
-${goto 60}MEM${alignr}MAX
-RAM${goto 60}${mem}${alignr}${memmax}
-Swap${goto 60}${swap}${alignr}${swapmax}
-
-CPU:${goto 60}Used${alignr}GHz
-Avg${goto 60}${if_match ${cpu cpu0}<10}  ${cpu cpu0}\
-${else}${if_match ${cpu cpu0}<100} ${cpu cpu0}\
-${else}${cpu cpu0}${endif}${endif}%${alignr}${freq_g}
+linux${goto 60}${fs_used /mnt/linux}${alignr}${fs_size /mnt/linux}
+win${goto 60}${fs_used /mnt/win}${alignr}${fs_size /mnt/win}
 
 ${alignc}S H O R T C U T    K E Y S
 ${hr}
@@ -168,3 +162,50 @@ ${hr}
 [S] + v${alignr}Volume Control
 [S] + x${alignr}Logout
 [PrtSc]${alignr}Screenshot
+
+RAM:$alignr$mem/$memmax
+${membar}
+Swap usage:$alignr$swap/$swapmax
+${swapbar}
+Disk usage:${fs_used /}/${fs_size /} $alignr Disk Temp: ${hddtemp /dev/sda}C
+${fs_bar /}
+CPU usage:${cpu cpu0}%${goto 60}${freq_g}$alignr CPU Temp: ${acpitemp}C
+${cpubar}
+Load:$alignr$loadavg
+Disk:$alignr${diskio /dev/sda}
+#$alignr PID     CPU%   MEM%
+#${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
+#${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
+#${top name 3} ${top pid 3} ${top cpu 3} ${top mem 3}
+Mem usage $alignr PID     CPU     MEM
+${top_mem name 1} $alignr ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
+${top_mem name 2} $alignr ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
+${top_mem name 3} $alignr ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
+
+P O R T A G E $alignr ${execi 30 /home/david-lee/.config/conky/emerge-status.sh}
+${hr}
+ Last Sync        ${execi 300 /home/david-lee/.config/conky/lastsync.pl}
+ Current Progress ${execibar 30 /home/david-lee/.config/conky/emerge-progress.sh}
+ Current Package  ${execi 30 /home/david-lee/.config/conky/emerge-current.sh}
+ Current Status   ${execi 30 /home/david-lee/.config/conky/emerge-status.sh}
+
+N E T W O R K I N G $alignr ${wireless_essid wlp2s0}# - ${linkstatus wlp2s0}
+${hr}
+Lokal: ${addr wlp2s0} ${offset 10} $alignr Global: ${execi 7200 ~/.config/conky/publicip.sh}
+Down: ${downspeed wlp2s0} k/s$alignr Up: ${upspeed wlp2s0} k/s
+${alignc}${downspeedgraph wlp2s0 32,100 000000 656667} ${upspeedgraph wlp2s0 32,100 000000 656667}
+Address: ${addr wlp2s0}${alignr}TCP Connections: ${tcp_portmon 1 65535 count}
+Inbound: ${tcp_portmon 1 32767 count}  Outbound: ${tcp_portmon 32768 61000 count}${alignr} ALL: ${tcp_portmon 1 65535 count}
+Inbound Connection ${alignr} Local Service/Port$color
+ ${tcp_portmon 1 32767 rhost 0} ${alignr} ${tcp_portmon 1 32767 lservice 0}
+ ${tcp_portmon 1 32767 rhost 1} ${alignr} ${tcp_portmon 1 32767 lservice 1}
+ ${tcp_portmon 1 32767 rhost 2} ${alignr} ${tcp_portmon 1 32767 lservice 2}
+ ${tcp_portmon 1 32767 rhost 3} ${alignr} ${tcp_portmon 1 32767 lservice 3}
+ ${tcp_portmon 1 32767 rhost 4} ${alignr} ${tcp_portmon 1 32767 lservice 4}
+Outbound Connection ${alignr} Remote Service/Port$color
+ ${tcp_portmon 32768 61000 rhost 0} ${alignr} ${tcp_portmon 32768 61000 rservice 0}
+ ${tcp_portmon 32768 61000 rhost 1} ${alignr} ${tcp_portmon 32768 61000 rservice 1}
+ ${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
+ ${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
+ ${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
+
