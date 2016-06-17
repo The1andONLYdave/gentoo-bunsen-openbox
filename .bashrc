@@ -52,7 +52,7 @@ alias gc="git clone"
 alias gp="git push"
 alias gpull="git pull"
 alias gs="git status"
-alias gp="eval `ssh-agent`  && ssh-add ../.ssh/id_rsa_github && git push"
+alias gp="eval 'ssh-agent'  && ssh-add ../.ssh/id_rsa_github && git push"
 
 echo "Custom Shortcuts: cl, .profile, editprofile, x, vg,vu,vh,vs,vr,
 gc,ga,gb,gcout,gc,gp,gpull,gs"
