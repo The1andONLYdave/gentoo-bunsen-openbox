@@ -158,18 +158,6 @@ ${alignc}S H O R T C U T    K E Y S
 ${hr}
 [Alt] + F2${alignr}Run Dialog
 [Alt] + F3${alignr}Alt Menu
-[S] + Space${alignr}Main Menu
-[S] + Tab${alignr}Client Menu
-[S] + t${alignr}Terminal
-[S] + f${alignr}File Manager
-[S] + e${alignr}Editor
-[S] + m${alignr}Media Player
-[S] + w${alignr}Web Browser
-[S] + h${alignr}Task Manager
-[S] + l${alignr}Lock Screen
-[S] + v${alignr}Volume Control
-[S] + x${alignr}Logout
-[PrtSc]${alignr}Screenshot
 
 RAM:$alignr$mem/$memmax
 ${membar}
@@ -216,4 +204,5 @@ Outbound Connection ${alignr} Remote Service/Port$color
  ${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
  ${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
  ${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
-
+dmesg
+${execi 1 sudo tail -n 5 /var/log/messages | awk '{print $1,$2,$3,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20}'}
