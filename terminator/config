@@ -2,9 +2,12 @@
 [keybindings]
 [profiles]
   [[default]]
-    background_image = None
-    scroll_on_output = False
+    palette = "#000000:#aa0000:#00aa00:#aa5500:#0000aa:#aa00aa:#00aaaa:#aaaaaa:#555555:#ff5555:#55ff55:#ffff55:#5555ff:#ff55ff:#55ffff:#ffffff"
+    background_darkness = 0.8
     background_type = transparent
+    background_image = None
+    foreground_color = "#ffffff"
+    scroll_on_output = False
     scrollback_infinite = True
 [layouts]
   [[default]]

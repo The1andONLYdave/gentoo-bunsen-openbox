@@ -63,7 +63,8 @@ default_outline_color 000000
 #default_color 656667 # Waldorf original colour
 #default_color 7a7a7a # Flame  & Bunsen Grey
 #default_color 929292 # Labs Grey
-default_color C0C0C0 # Silver
+#default_color C0C0C0 # Silver
+default_color D918AB # Pink
 color0 B0E0E6 # PowderBlue
 color1 778899 # LightSlateGray
 color2 D8BFD8 # Thistle
@@ -113,7 +114,7 @@ pad_percents 2
 
 # Imlib2 image cache size, in bytes. Default 4MiB Increase this value if you use
 # $image lots. Set to 0 to disable the image cache.
-imlib_cache_size 0
+#imlib_cache_size 0
 
 # Use the Xdbe extension? (eliminates flicker)
 # It is highly recommended to use own window with this one
@@ -143,8 +144,15 @@ UTC:${alignr}${utime %H:%M}
 
 ${goto 60}Used${alignr}Size
 Root${goto 60}${fs_used /}${alignr}${fs_size /}
-linux${goto 60}${fs_used /mnt/linux}${alignr}${fs_size /mnt/linux}
-win${goto 60}${fs_used /mnt/win}${alignr}${fs_size /mnt/win}
+
+RAID
+USED${goto 60}${fs_used /mnt/raid}${alignr}SIZE ${fs_size /mnt/raid}
+Rate disk1 ${diskio /dev/sdb}${alignr}Rate disk2 ${diskio /dev/sdc}
+Status: ${execi 60 /home/david-lee/.config/conky/md.sh}
+
+
+#linux${goto 60}${fs_used /mnt/linux}${alignr}${fs_size /mnt/linux}
+#win${goto 60}${fs_used /mnt/win}${alignr}${fs_size /mnt/win}
 
 ${alignc}S H O R T C U T    K E Y S
 ${hr}
