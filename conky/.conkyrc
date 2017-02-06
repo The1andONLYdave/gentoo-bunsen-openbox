@@ -35,15 +35,15 @@ own_window_title Bunsen Labs Default Conky
 minimum_size 330 200  ### width | height
 maximum_width 330
 
-gap_x 20    ### left | right
-gap_y 45    ### up | down
+gap_x 5    ### left | right
+gap_y 5    ### up | down
 
 alignment tr
 #######################  End Window Settings  ###
 ###  Font Settings  #############################
 # Use Xft (anti-aliased font and stuff)
 use_xft yes
-xftfont Monospace:bold:size=9
+xftfont Monospace:bold:size=7
 #xftfont Liberation Sans:size=9
 
 # Alpha of Xft font. Must be a value at or between 1 and 0 ###
@@ -64,7 +64,8 @@ default_outline_color 000000
 #default_color 7a7a7a # Flame  & Bunsen Grey
 #default_color 929292 # Labs Grey
 #default_color C0C0C0 # Silver
-default_color D918AB # Pink
+default_color FFFF00 
+# Pink
 color0 B0E0E6 # PowderBlue
 color1 778899 # LightSlateGray
 color2 D8BFD8 # Thistle
@@ -134,7 +135,7 @@ double_buffer yes
 update_interval 1
 
 TEXT
-${color}${alignc}S Y S T E M    I N F O${alignr} $battery  $battery_time 
+${color}${alignc}S Y S T E M    I N F O${alignr} $battery
 ${hr}
 #$if_mixer_mute    ${mixer 'Master',0}                  ${blink Lautstaerke auf 0 } $endif 
 Kernel:${alignr}$kernel
@@ -144,15 +145,7 @@ UTC:${alignr}${utime %H:%M}
 
 ${goto 60}Used${alignr}Size
 Root${goto 60}${fs_used /}${alignr}${fs_size /}
-
-RAID
-USED${goto 60}${fs_used /mnt/raid}${alignr}SIZE ${fs_size /mnt/raid}
-Rate disk1 ${diskio /dev/sdb}${alignr}Rate disk2 ${diskio /dev/sdc}
-Status: ${execi 60 /home/david-lee/.config/conky/md.sh}
-
-
-#linux${goto 60}${fs_used /mnt/linux}${alignr}${fs_size /mnt/linux}
-#win${goto 60}${fs_used /mnt/win}${alignr}${fs_size /mnt/win}
+Karte${goto 60}${fs_used /var/host/media/removable/CHROMEKARTE}${alignr}${fs_size /var/host/media/removable/CHROMEKARTE}
 
 ${alignc}S H O R T C U T    K E Y S
 ${hr}
@@ -163,12 +156,14 @@ RAM:$alignr$mem/$memmax
 ${membar}
 Swap usage:$alignr$swap/$swapmax
 ${swapbar}
-Disk usage:${fs_used /}/${fs_size /} $alignr Disk Temp: ${hddtemp /dev/sda}C
+Disk usage:$alignr${fs_used /}/${fs_size /}
 ${fs_bar /}
+Card usage:$alignr${fs_used /var/host/media/removable/CHROMEKARTE}/${fs_size /var/host/media/removable/CHROMEKARTE}
+${fs_bar /var/host/media/removable/CHROMEKARTE}
 CPU usage:${cpu cpu0}%${goto 120}${freq_g}-Ghz$alignr CPU Temp: ${acpitemp}C
 ${cpubar}
 Load:$alignr$loadavg
-Disk:$alignr${diskio /dev/sda}
+Disk:$alignr${diskio /dev/mmcblk0}
 #$alignr PID     CPU%   MEM%
 #${top name 1} ${top pid 1} ${top cpu 1} ${top mem 1}
 #${top name 2} ${top pid 2} ${top cpu 2} ${top mem 2}
@@ -178,19 +173,12 @@ ${top_mem name 1} $alignr ${top_mem pid 1} ${top_mem cpu 1} ${top_mem mem 1}
 ${top_mem name 2} $alignr ${top_mem pid 2} ${top_mem cpu 2} ${top_mem mem 2}
 ${top_mem name 3} $alignr ${top_mem pid 3} ${top_mem cpu 3} ${top_mem mem 3}
 
-P O R T A G E $alignr ${execi 30 /home/david-lee/.config/conky/emerge-status.sh}
+N E T W O R K I N G $alignr ${wireless_essid wlan0}# - ${linkstatus wlan0}
 ${hr}
- Last Sync        ${execi 300 /home/david-lee/.config/conky/lastsync.pl}
- Current Progress ${execibar 30 /home/david-lee/.config/conky/emerge-progress.sh}
- Current Package  ${execi 30 /home/david-lee/.config/conky/emerge-current.sh}
- Current Status   ${execi 30 /home/david-lee/.config/conky/emerge-status.sh}
-
-N E T W O R K I N G $alignr ${wireless_essid wlp2s0}# - ${linkstatus wlp2s0}
-${hr}
-Lokal: ${addr wlp2s0} ${offset 10} $alignr Global: ${execi 7200 ~/.config/conky/publicip.sh}
-Down: ${downspeed wlp2s0} k/s$alignr Up: ${upspeed wlp2s0} k/s
-${alignc}${downspeedgraph wlp2s0 32,100 000000 656667} ${upspeedgraph wlp2s0 32,100 000000 656667}
-Address: ${addr wlp2s0}${alignr}TCP Connections: ${tcp_portmon 1 65535 count}
+Lokal: ${addr wlan0} ${offset 10} $alignr Global: ${execi 7200 ~/.config/conky/publicip.sh}
+Down: ${downspeed wlan0} k/s$alignr Up: ${upspeed wlan0} k/s
+${alignc}${downspeedgraph wlan0 32,100 000000 656667} ${upspeedgraph wlan0 32,100 000000 656667}
+Address: ${addr wlan0}${alignr}TCP Connections: ${tcp_portmon 1 65535 count}
 Inbound: ${tcp_portmon 1 32767 count}  Outbound: ${tcp_portmon 32768 61000 count}${alignr} ALL: ${tcp_portmon 1 65535 count}
 Inbound Connection ${alignr} Local Service/Port$color
  ${tcp_portmon 1 32767 rhost 0} ${alignr} ${tcp_portmon 1 32767 lservice 0}
@@ -204,5 +192,12 @@ Outbound Connection ${alignr} Remote Service/Port$color
  ${tcp_portmon 32768 61000 rhost 2} ${alignr} ${tcp_portmon 32768 61000 rservice 2}
  ${tcp_portmon 32768 61000 rhost 3} ${alignr} ${tcp_portmon 32768 61000 rservice 3}
  ${tcp_portmon 32768 61000 rhost 4} ${alignr} ${tcp_portmon 32768 61000 rservice 4}
-dmesg
-${execi 1 sudo tail -n 5 /var/log/messages | awk '{print $1,$2,$3,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20}'}
+ ${tcp_portmon 32768 61000 rhost 5} ${alignr} ${tcp_portmon 32768 61000 rservice 5}
+ ${tcp_portmon 32768 61000 rhost 6} ${alignr} ${tcp_portmon 32768 61000 rservice 6}
+ ${tcp_portmon 32768 61000 rhost 7} ${alignr} ${tcp_portmon 32768 61000 rservice 7}
+ ${tcp_portmon 32768 61000 rhost 8} ${alignr} ${tcp_portmon 32768 61000 rservice 8}
+ ${tcp_portmon 32768 61000 rhost 9} ${alignr} ${tcp_portmon 32768 61000 rservice 9}
+ ${tcp_portmon 32768 61000 rhost 10} ${alignr} ${tcp_portmon 32768 61000 rservice 10}
+D M E S G
+${execi 1 sudo dmesg -xT | tail -n 5 | awk '{print $1,$2,$3,$7,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20}'}
+
